@@ -1,0 +1,20 @@
+{
+  "name": "openperfagent",
+  "interface": {
+    "displayName": "OpenPerfAgent"
+  },
+  "plugins": [
+    {
+      "name": "who-ate-my-flops",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

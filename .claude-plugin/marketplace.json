@@ -1,0 +1,14 @@
+{
+  "name": "openperfagent",
+  "owner": {
+    "name": "OpenPerfAgent",
+    "url": "https://github.com/OpenPerfAgent"
+  },
+  "plugins": [
+    {
+      "name": "who-ate-my-flops",
+      "source": "./",
+      "description": "Diagnose a PyTorch job on one node and make it faster without changing what it computes: profile, propose a fix with a measured number behind it, or run a whole campaign that measures, gates on correctness and hands back a branch."
+    }
+  ]
+}

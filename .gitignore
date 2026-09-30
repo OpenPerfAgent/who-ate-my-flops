@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# run artifacts, if a campaign is ever driven from inside this checkout
+runs/
+outputs/
+profile/
