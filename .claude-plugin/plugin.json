@@ -1,0 +1,16 @@
+{
+  "name": "who-ate-my-flops",
+  "description": "Diagnose a PyTorch job on one node and make it faster without changing what it computes: profile, propose a fix with a measured number behind it, or run a whole campaign that measures, gates on correctness and hands back a branch.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Hexu Zhao"
+  },
+  "homepage": "https://github.com/OpenPerfAgent/who-ate-my-flops",
+  "keywords": [
+    "pytorch",
+    "performance",
+    "profiling",
+    "benchmark",
+    "diagnosis"
+  ]
+}
