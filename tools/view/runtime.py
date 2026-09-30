@@ -46,15 +46,17 @@ def render(con: sqlite3.Connection) -> str:
 
 
 def _no_steps(con: sqlite3.Connection) -> list[str]:
-    """Fall back to the whole capture window when nothing annotated the steps."""
-    span = con.execute(f"SELECT MIN(ts_ns), MAX(ts_ns+dur_ns) FROM events "
-                       f"WHERE cat IN {GPU_CATS}").fetchone()
-    if not span or span[0] is None:
+    """Fall back to each rank's GPU event window when no steps are annotated."""
+    spans = con.execute(f"SELECT rank, MIN(ts_ns), MAX(ts_ns+dur_ns) FROM events "
+                        f"WHERE cat IN {GPU_CATS} GROUP BY rank ORDER BY rank").fetchall()
+    if not spans:
         return ["  (no GPU events)"]
-    t0, t1 = span
-    busy = sum(e - s for s, e in busy_intervals(con, 0, t0, t1))
-    wall = t1 - t0
-    return [f"  no step markers; window {fmt_ms(wall)}ms  busy {fmt_ms(busy)}ms "
-            f"({busy / wall:.1%})  idle {fmt_ms(wall - busy)}ms ({1 - busy / wall:.1%})",
-            "  (capture with a step annotation, such as torch.profiler's ProfilerStep, "
-            "to get the per-step spine)"]
+    out = []
+    for rank, t0, t1 in spans:
+        busy = sum(e - s for s, e in busy_intervals(con, rank, t0, t1))
+        wall = t1 - t0
+        busy_fraction = busy / wall if wall else 0
+        out.append(f"  r{rank}: no step markers; window {fmt_ms(wall)}ms  busy {fmt_ms(busy)}ms "
+                   f"({busy_fraction:.1%})  idle {fmt_ms(wall - busy)}ms ({1 - busy_fraction:.1%})")
+    return out + ["  (capture with a step annotation, such as torch.profiler's ProfilerStep, "
+                  "to get the per-step spine)"]

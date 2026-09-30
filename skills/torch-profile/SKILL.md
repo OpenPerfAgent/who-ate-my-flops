@@ -68,8 +68,7 @@ a `render(con)` if you want one on its own.
    then name as an entry in `records/execution_schedule.json` rather than as a symptom.
 3. **Kernel table** (`3_kernel_table.txt`). Cumulative time bucketed into
    attention, GEMM, communication, element-wise and transfer, with bytes moved
-   and achieved bandwidth wherever the event carries a size. Multiply each row by
-   its repeat count from `records/computation_graph.json` before you rank anything.
+   and achieved bandwidth wherever the event carries a size.
    Copies are in here on purpose: a device-to-host copy counts as GPU-busy, so it
    sits in no gap, and it disappears from every view at once if this one drops
    it.

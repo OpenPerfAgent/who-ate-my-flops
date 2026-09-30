@@ -110,7 +110,7 @@ You can cite our [blog post](https://openperfagent.github.io/who-ate-my-flops/) 
 
 ```bibtex
 @misc{zhao2026whoatemyflops,
-  title        = {Beyond Kernels: Building a Performance Agent for {AI} Workloads},
+  title        = {Beyond kernels: Letting agents optimize the whole {AI} job},
   author       = {Zhao, Hexu and Xi, Haocheng and Wang, Yichuan and Yin, Shaofeng and Lv, Zhaoyang and Feng, Haiwen and Li, Xiuyu and Panda, Aurojit and Li, Jinyang},
   year         = {2026},
   url          = {https://openperfagent.github.io/who-ate-my-flops/}
